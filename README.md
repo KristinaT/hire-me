@@ -1,74 +1,24 @@
-# Interested in working for Famly?
+# Hire-me app
 
-Give us a chance to see your beautiful code! 🤩
+This project is set up using create-react-app and Yarn as a package manager.
 
-How to get started:
-- Fork this repository
-- Create a small application in React (or another agreed upon framework)
-- Describe your design decisions and setup instructions in the README.md of the forked repository
+## Setting up environment variables
+Before you start the project, a setup of environment variables is required. There is an `.env.example` file in this repo. Just rename it to `.env` and everything will be set up for you.
 
-The application should be able to do 3 things:
-1. List children with some form of pagination/lazy-loading/infinite-scroll
-2. Checkin a child
-3. Checkout a child
-
-There are no other requirements than that—don't worry about design or anything like that.
-
-If you have any questions feel free to reach out to ckl@famly.co (Christian) or ab@famly.co (Adam) ☺️
-
-## API Specification
-
-You will receive an access token in an email during the recruiment process.
-
-### Fetch some children from
-
-The API does not support any limit or offset, so the pagination/lazy-loading/infinite-scroll will have to be done client-side only.
+## Starting the project
+Before you start the project, you need to install dependencies using the following command:
 
 ```
-GET https://app.famly.co/api/daycare/tablet/group
-Arguments: {
-	accessToken: <accessToken>,
-	groupId: '86413ecf-01a1-44da-ba73-1aeda212a196',
-	institutionId: 'dc4bd858-9e9c-4df7-9386-0d91e42280eb'
-}
+yarn
 ```
 
-Example in cURL:
+After that, you can run `yarn start` and a development server will be started for you.
 
-```bash
-curl "https://app.famly.co/api/daycare/tablet/group?accessToken=<accessToken>&groupId=86413ecf-01a1-44da-ba73-1aeda212a196&institutionId=dc4bd858-9e9c-4df7-9386-0d91e42280eb"
-```
+## Core libraries
 
-### Checkin child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkins
+This project uses Material-UI for design components because it offers everything it needs out of the box. 
+Additionally, it uses date-fns for date formatting because it is very lightweight unlike other solutions like moment or luxon.
 
-Arguments: {
-	accessToken: <accessToken>
-	pickupTime: 16:00
-}
-```
+For the API calls it uses react-query in combination with axios. Because it doesn't rely heavily on local state, react-query offers significant benefits over Redux, for example.
 
-Example in cURL:
-
-```bash
-curl \
-  -d 'accessToken=<accessToken>&pickupTime=16:00' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkins
-```
-
-### Checkout child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkout
-Arguments: {
-	accessToken: <accessToken>
-}
-```
-
-Example in cURL:
-
-```bash
-curl \
-  -d 'accessToken=<accessToken>' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkout
-```
+Pagination is implemented using Material-UI `TablePagination` component.
